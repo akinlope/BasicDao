@@ -1,36 +1,29 @@
 'reach 0.1';
 
 
-// const Persons = {
-//   // seeOutcome: Fun([UInt], Null),
-//   // informTimeout: Fun([], Null)
-// }
-
-export const main = Reach.App(() => {
-const user1 = Participant("user1", {
-  funds: UInt,
-  deadline: UInt, 
+const Persons = {
   informTimeout: Fun([], Null),
   viewIdea1:  Fun([UInt], Null),
   viewIdea2:  Fun([UInt], Null),
   voteIdea: Fun([], UInt),
   seeOutcome: Fun([UInt], Null)
+}
+
+export const main = Reach.App(() => {
+const user1 = Participant("user1", {
+  ...Persons,
+  funds: UInt,
+  deadline: UInt, 
+  
 });
 const user2 = Participant("user2", {
+  ...Persons,
   accepFunds: Fun([UInt], Null),   ///acceptFunds= (funds) => {do wahtsoever with funds}
-  informTimeout: Fun([], Null),
-  viewIdea1: Fun([UInt], Null),
-  viewIdea2: Fun([UInt], Null),
-  voteIdea: Fun([], UInt),
-  seeOutcome: Fun([UInt], Null)
+  
 });
 const user3 = Participant("user3", {
+  ...Persons,
   accepFunds: Fun([UInt], Null),   ///acceptFunds= (funds) => {do wahtsoever with funds}
-  informTimeout: Fun([], Null),
-  viewIdea1: Fun([UInt], Null),
-  viewIdea2: Fun([UInt], Null),
-  voteIdea: Fun([], UInt),
-  seeOutcome: Fun([UInt], Null)
 });
 
 const Proposer1 = Participant("Proposer1", {
