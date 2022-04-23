@@ -68,7 +68,7 @@ user1.only(()=> {
   const funds = declassify(interact.funds); 
   const deadline = declassify(interact.deadline) 
   const ideaOne = declassify(interact.viewIdea1(idea1));
-  const ideaTwo = declassify(interact.viewIdea2((idea2)));
+  const ideaTwo = declassify(interact.viewIdea2(idea2));
   const vote1 = declassify(interact.voteIdea());
   assume(vote1 == idea1 || vote1 ==idea2)
   assert(vote1 == idea1 || vote1 ==idea2);
@@ -124,6 +124,8 @@ else if(vote1 == idea2 && vote3 == idea2){transfer(funds * 3 ).to(Proposer2)}
 else if(vote2 == idea2 && vote3 == idea2){transfer(funds * 3 ).to(Proposer2)}
 else if(vote2 == idea1 && vote3 == idea1){transfer(funds * 3 ).to(Proposer1)}
 //if(true){transfer to proposer1}
+
+
 
 
 commit();
