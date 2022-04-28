@@ -26,13 +26,6 @@ const ctcUser3 = accUser3.contract(backend, ctcProposer1.getInfo());
 const ctcUser1 = accUser1.contract(backend, ctcProposer1.getInfo());
 const ctcProposer2 = accProposer2.contract(backend, ctcProposer1.getInfo())
 
-const OUTCOME = ["idea1", "idea2"]
-const Persons = (Who) =>({
-    informTimeout: () => {
-        console.log(`${Who} observed a timeout`);
-    },
-})
-
 
 
 try{
@@ -55,7 +48,6 @@ await Promise.all([
 
         //THE THREE(3) PARTICIPANTS
     ctcUser1.p.user1({
-        ...Persons("user1"),
         funds: stdlib.parseCurrency(200),
         deadline: 5,
     viewIdea1: (idea) => console.log(`User1 view idea ${idea}`),
@@ -63,7 +55,6 @@ await Promise.all([
     voteIdea: async() => {return 1},
     }),
     ctcUser2.p.user2({
-        ...Persons("user2"),
         accepFunds: async (amt) => {
             console.log(`user2 pays ${fmt(amt)} to the network`);
         },
@@ -73,7 +64,6 @@ await Promise.all([
 
     }),
     ctcUser3.p.user3({
-        ...Persons("user3"),
         accepFunds: (amt)=> {
             console.log(`user3 also pays ${fmt(amt)} to the network`);
         },
@@ -82,8 +72,11 @@ await Promise.all([
         voteIdea: async() => {return 2}
     }),
 
+  
 
 ]);
+
+
 }catch(err){
     console.log(err);
 }
@@ -93,6 +86,12 @@ const afterUser2 = await getBalance(accUser2);
 const afterUser3 = await getBalance(accUser3);
 const afterProposer1 = await getBalance(accProposer1);
 const afterProposer2 = await getBalance(accProposer2)
+
+if(afterProposer2 > afterProposer1){
+    console.log("Idea 1 has the highest vote...");
+}else{
+    console.log("Idea 2 has the highest vote...");
+}
 
 console.log(`User1 went from ${beforeUser1} to ${afterUser1}`);
 console.log(`User2 went from ${beforeUser2} to ${afterUser2}`);
